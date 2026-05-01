@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { fetchTiles } from "@/lib/tile";
 
 const FeaturedTiles = () => {
   const [tiles, setTiles] = useState([]);
 
-  useEffect(() => {
-    const fetchTiles = async () => {
-      const res = await fetch("http://localhost:5000/tiles");
-      const data = await res.json();
-      setTiles(data.slice(0, 4)); // top 4 tiles
-    };
+useEffect(() => {
+  const loadTiles = async () => {
+    const data = await fetchTiles();
+    setTiles(data.tiles.slice(0, 4)); // Get only the first 4 tiles for featured section  
+  };
 
-    fetchTiles();
-  }, []);
+  loadTiles();
+}, []);
 
   return (
     <div className="grid md:grid-cols-4 gap-6">
