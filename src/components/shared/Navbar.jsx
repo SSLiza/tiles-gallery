@@ -1,0 +1,49 @@
+'use client'
+import Image from 'next/image';
+import Link from 'next/link';
+import NavLink from './NavLink';
+import logo from '@/assets/logo.png';
+
+const Navbar = () => {
+  return (
+    <div className="bg-[#7a756c] text-white border-b-0.5 sticky top-0 z-50">
+      <div className="container mx-auto flex justify-between items-center px-4 py-3">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src={logo}
+            alt="Tile Gallery Logo"
+            width={45}
+            height={45}
+            className="rounded-full"
+          />
+          <span className="font-semibold text-lg">
+            TileGallery
+          </span>
+        </Link>
+
+        {/* Nav Links */}
+        <ul className="hidden md:flex gap-8 font-medium">
+          <li><NavLink href="/">Home</NavLink></li>
+          <li><NavLink href="/all-tiles">All Tiles</NavLink></li>
+          <li><NavLink href="/my-profile">My Profile</NavLink></li>
+        </ul>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-3">
+
+          {/* Login Button */}
+          <Link href="/login">
+            <button className="bg-[#1a1814] px-4 py-2 rounded-md btn font-medium">
+              Login
+            </button>
+          </Link>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
