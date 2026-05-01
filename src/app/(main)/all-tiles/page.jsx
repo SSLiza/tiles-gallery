@@ -3,27 +3,22 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchTiles } from "@/lib/tile";
 
 const AllTilesPage = () => {
   const [tiles, setTiles] = useState([]);
-
   useEffect(() => {
-    const fetchTiles = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/tiles");
-        const data = await res.json();
-        setTiles(data);
-      } catch (error) {
-        console.error("Error fetching tiles:", error);
-      }
+    const loadTiles = async () => {
+      const data = await fetchTiles();
+      setTiles(data);
     };
 
-    fetchTiles();
+    loadTiles();
   }, []);
 
   return (
     <div className="bg-[#0f0e0c] text-[#f5f0e8] min-h-screen px-4 py-12">
-      
+
       <h1 className="text-3xl md:text-4xl text-center text-[#c9a96e] mb-10">
         All Tiles
       </h1>

@@ -3,23 +3,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { fetchTileById } from "@/lib/tile";
 
 const TileDetailsPage = () => {
   const { id } = useParams();
   const [tile, setTile] = useState(null);
 
-  useEffect(() => {
-    const fetchTile = async () => {
-      try {
-        const res = await fetch(`http://localhost:5000/tiles/${id}`);
-        const data = await res.json();
-        setTile(data);
-      } catch (error) {
-        console.error("Error fetching tile:", error);
-      }
+useEffect(() => {
+    const loadTile = async () => {
+      const data = await fetchTileById(id);
+      setTile(data);
     };
 
-    if (id) fetchTile();
+    if (id) loadTile();
   }, [id]);
 
   if (!tile) {
