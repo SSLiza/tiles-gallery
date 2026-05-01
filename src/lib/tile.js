@@ -1,7 +1,6 @@
-
 export const fetchTiles = async () => {
   try {
-    const res = await fetch("https://tiles-gallery-six.vercel.app/data.json");
+    const res = await fetch("/data.json");
 
     if (!res.ok) {
       throw new Error("Failed to fetch tiles");
@@ -13,17 +12,19 @@ export const fetchTiles = async () => {
     return [];
   }
 };
-
 // fetch single tile by id
 export const fetchTileById = async (id) => {
   try {
-    const res = await fetch(`https://tiles-gallery-six.vercel.app/data.json/${id}`);
+    const res = await fetch("/data.json");
 
     if (!res.ok) {
-      throw new Error("Tile not found");
+      throw new Error("Failed to fetch tiles");
     }
 
-    return await res.json();
+    const data = await res.json();
+    const tiles = data.tiles || data;
+
+    return tiles.find((item) => item.id === id) || null;
   } catch (error) {
     console.error("Error fetching tile:", error);
     return null;

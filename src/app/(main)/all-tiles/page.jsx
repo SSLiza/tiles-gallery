@@ -7,14 +7,14 @@ import { fetchTiles } from "@/lib/tile";
 
 const AllTilesPage = () => {
   const [tiles, setTiles] = useState([]);
-  useEffect(() => {
-    const loadTiles = async () => {
-      const data = await fetchTiles();
-      setTiles(data);
-    };
+useEffect(() => {
+  const loadTiles = async () => {
+    const data = await fetchTiles();
+    setTiles(data.tiles);
+  };
 
-    loadTiles();
-  }, []);
+  loadTiles();
+}, []);
 
   return (
     <div className="bg-[#0f0e0c] text-[#f5f0e8] min-h-screen px-4 py-12">
