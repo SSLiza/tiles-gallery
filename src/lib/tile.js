@@ -1,6 +1,6 @@
 export const fetchTiles = async () => {
   try {
-    const res = await fetch("/data.json");
+    const res = await fetch("https://tiles-gallery-six.vercel.app/data.json");
 
     if (!res.ok) {
       throw new Error("Failed to fetch tiles");
@@ -15,7 +15,7 @@ export const fetchTiles = async () => {
 // fetch single tile by id
 export const fetchTileById = async (id) => {
   try {
-    const res = await fetch("/data.json");
+    const res = await fetch("https://tiles-gallery-six.vercel.app/data.json");
 
     if (!res.ok) {
       throw new Error("Failed to fetch tiles");
