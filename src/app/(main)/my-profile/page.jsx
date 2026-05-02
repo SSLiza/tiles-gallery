@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 const MyProfile = () => {
   const userInfo = authClient.useSession();
   const user = userInfo.data?.user;
+ 
 
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-6 py-10">
