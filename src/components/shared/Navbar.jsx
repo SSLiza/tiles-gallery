@@ -3,8 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import NavLink from './NavLink';
 import logo from '@/assets/logo.png';
+import { authClient } from '@/lib/auth-client';
 
 const Navbar = () => {
+  // const userInfo=authClient.useSession();
+  // console.log(userInfo.data?.user);
   return (
     <div className="bg-[#7a756c] text-white border-b-0.5 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">

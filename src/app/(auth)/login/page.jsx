@@ -29,7 +29,9 @@ export default function LoginPage() {
       alert("Login successful!");
     }
   };
-
+  const onGoogleSignIn = async () => {
+    await authClient.signIn.social({ provider: "google", callbackURL: "/" });
+  }
   return (
     <Card className="border mx-auto w-125 py-10 mt-5">
       <h1 className="text-center text-2xl font-bold">Login</h1>
@@ -90,6 +92,10 @@ export default function LoginPage() {
           </Button>
         </div>
       </Form>
+      <p className="text-center">OR</p>
+      <Button onClick={onGoogleSignIn} variant="outline" className="w-full">
+        Sign in with Google
+      </Button>
     </Card>
   );
 }
