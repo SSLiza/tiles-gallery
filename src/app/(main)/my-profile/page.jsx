@@ -5,70 +5,79 @@ import { authClient } from "@/lib/auth-client";
 const MyProfile = () => {
   const userInfo = authClient.useSession();
   const user = userInfo.data?.user;
- 
 
   return (
-    <div className="min-h-screen bg-[#f5f3ef] px-6 py-10">
-      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
-        
-        {/* Cover Banner */}
-        <div className="h-40 bg-[url('https://i.pinimg.com/1200x/8a/fe/83/8afe83b98f339de4c1dd34fde26a86d0.jpg')] bg-cover bg-center"></div>
+    <div className="min-h-screen px-6 py-12 flex justify-center items-center">
 
-        {/* Profile Section */}
-        <div className="px-6 py-8 flex flex-col md:flex-row gap-6 items-center md:items-start">
-          
-          {/* Avatar */}
-          <img
-            src={user?.image || "https://i.ibb.co/4pDNDk1/avatar.png"}
-            alt="user"
-            className="w-28 h-28 rounded-full border-4 border-white shadow-md -mt-16"
-          />
+      <div className="w-full max-w-4xl">
 
-          {/* Info */}
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-semibold text-[#1a1814]">
-              {user?.name || "Guest User"}
-            </h2>
-            <p className="text-gray-500 text-sm mt-1">
-              {user?.email || "No email available"}
-            </p>
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
 
-            {/* Role / Tag */}
-            <span className="inline-block mt-3 px-3 py-1 text-xs bg-[#e8dfd3] text-[#5c4b3b] rounded-full">
-              Tile Enthusiast
-            </span>
-          </div>
-        </div>
+          {/* Profile Section */}
+          <div className="px-8 py-10 flex flex-col md:flex-row gap-8 items-center md:items-start">
 
-        {/* Divider */}
-        <div className="border-t"></div>
+            {/* Avatar */}
+            <div>
+              <img
+                src={user?.image || "https://i.ibb.co/4pDNDk1/avatar.png"}
+                alt="user"
+                className="w-32 h-32 rounded-full border-4 border-gray-200 shadow-md object-cover"
+              />
+            </div>
 
-        {/* Extra Info Section */}
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          <div className="bg-[#f9f7f4] p-4 rounded-lg shadow-sm">
-            <h3 className="font-medium text-[#1a1814] mb-2">Account Info</h3>
-            <p className="text-sm text-gray-600">
-              Joined: Recently
-            </p>
-            <p className="text-sm text-gray-600">
-              Status: Active
-            </p>
+            {/* Info */}
+            <div className="text-center md:text-left flex-1">
+
+              <h2 className="text-3xl font-bold text-gray-800">
+                {user?.name || "Guest User"}
+              </h2>
+
+              <p className="text-gray-500 mt-1">
+                {user?.email || "No email available"}
+              </p>
+
+              <span className="inline-block mt-4 px-4 py-1 text-sm bg-gray-100 text-[#5B7E3C] rounded-full">
+                Tile Enthusiast
+              </span>
+
+              {/* Button */}
+              <div className="mt-6">
+                <UpdateUserModal />
+              </div>
+            </div>
           </div>
 
-          <div className="bg-[#f9f7f4] p-4 rounded-lg shadow-sm">
-            <h3 className="font-medium text-[#1a1814] mb-2">Preferences</h3>
-            <p className="text-sm text-gray-600">
-              Favorite Category: Ceramic Tiles
-            </p>
-            <p className="text-sm text-gray-600">
-              Theme: Minimal Aesthetic
-            </p>
+          {/* Divider */}
+          <div className="border-t" />
+
+          {/* Info Grid */}
+          <div className="p-8 grid md:grid-cols-2 gap-6">
+
+            <div className="bg-gray-50 p-5 rounded-xl hover:shadow-md transition">
+              <h3 className="text-[#5B7E3C] font-semibold mb-3">
+                Account Info
+              </h3>
+              <p className="text-gray-500 text-sm">Joined: Recently</p>
+              <p className="text-gray-500 text-sm">Status: Active</p>
+            </div>
+
+            <div className="bg-gray-50 p-5 rounded-xl hover:shadow-md transition">
+              <h3 className="text-[#5B7E3C] font-semibold mb-3">
+                Preferences
+              </h3>
+              <p className="text-gray-500 text-sm">
+                Favorite Category: Ceramic Tiles
+              </p>
+              <p className="text-gray-500 text-sm">
+                Theme: Minimal Aesthetic
+              </p>
+            </div>
+
           </div>
-           <UpdateUserModal/>
+
         </div>
       </div>
-      
     </div>
   );
 };

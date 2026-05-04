@@ -12,7 +12,7 @@ const NavLink = ({ href, children }) => {
       className={`
         relative px-2 py-1 transition-all duration-300
         ${isActive 
-          ? 'text-[#1a1814]' 
+          ? 'border-b-2 border-[var(--gold)] text-black font-semibold' 
           : ''}
       `}
     >

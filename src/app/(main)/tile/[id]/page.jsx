@@ -9,78 +9,89 @@ const TileDetailsPage = () => {
   const { id } = useParams();
   const [tile, setTile] = useState(null);
 
-useEffect(() => {
+  useEffect(() => {
     const loadTile = async () => {
       const data = await fetchTileById(id);
       setTile(data);
     };
-
     if (id) loadTile();
   }, [id]);
 
   if (!tile) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return (
+      <div className="min-h-screen bg-[#f9f9f7] flex items-center justify-center">
+        <p className="text-sm text-gray-400 tracking-widest uppercase">Loading...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="bg-[#0f0e0c] text-[#f5f0e8] min-h-screen px-4 py-12">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-
+    <div className="min-h-screen bg-[#f9f9f7] px-6 py-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <div
+        className="max-w-4xl mx-auto grid md:grid-cols-2 overflow-hidden bg-white"
+        style={{ borderRadius: "20px", boxShadow: "0 2px 32px rgba(0,0,0,0.07)", border: "1px solid #eee" }}
+      >
         {/* LEFT: IMAGE */}
-        <div className="relative w-full h-[400px] md:h-[500px]">
-          <Image
-            src={tile.image}
-            alt={tile.title}
-            fill
-            className="object-cover rounded-xl"
-          />
+        <div className="relative min-h-[500px] bg-[#f4f6f2]">
+          <Image src={tile.image} alt={tile.title} fill className="object-cover" />
+          <span className="absolute top-4 left-4 bg-[#5B7E3C] text-white text-[10px] uppercase tracking-widest font-medium px-3 py-1 rounded-full">
+            New Arrival
+          </span>
         </div>
 
         {/* RIGHT: DETAILS */}
-        <div>
-          <h1 className="text-4xl text-[#c9a96e] font-bold mb-3">
+        <div className="flex flex-col p-10">
+          <p className="text-[10px] tracking-[0.18em] uppercase text-[#5B7E3C] font-medium mb-1">
+            Artisan Collection
+          </p>
+
+          <h1 className="text-[2rem] font-bold text-[#1a1a18] leading-tight mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>
             {tile.title}
           </h1>
 
-          <p className="text-sm text-[#aaa] mb-2">
-            By: {tile.creator || "Unknown"}
+          <p className="text-[13px] text-[#aaa] mb-5">By {tile.creator || "Unknown"}</p>
+
+          <p className="text-[1.7rem] font-bold text-[#5B7E3C] mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+            ${tile.price} <span className="text-[13px] font-normal text-[#aaa]">{tile.currency}</span>
           </p>
 
-          <p className="text-lg mb-4">
-            ${tile.price} {tile.currency}
-          </p>
+          <p className="text-[14px] text-[#777] leading-relaxed mb-5">{tile.description}</p>
 
-          <p className="text-[#cfc7b8] mb-4">
-            {tile.description}
-          </p>
+          <hr className="border-[#f0f0ee] mb-5" />
 
-          {/* Extra Info */}
-          <div className="mb-4 text-sm space-y-1">
-            <p><strong>Material:</strong> {tile.material}</p>
-            <p><strong>Dimensions:</strong> {tile.dimensions}</p>
-            <p>
-              <strong>Status:</strong>{" "}
-              {tile.inStock ? (
-                <span className="text-green-400">In Stock</span>
-              ) : (
-                <span className="text-red-400">Out of Stock</span>
-              )}
-            </p>
+          <div className="flex flex-col gap-2 mb-5">
+            <div className="flex justify-between text-[13px]">
+              <span className="text-[#bbb]">Material</span>
+              <span className="text-[#333] font-medium">{tile.material}</span>
+            </div>
+            <div className="flex justify-between text-[13px]">
+              <span className="text-[#bbb]">Dimensions</span>
+              <span className="text-[#333] font-medium">{tile.dimensions}</span>
+            </div>
           </div>
 
-          {/* TAGS */}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {tile.tags?.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-[#c9a96e] text-black px-3 py-1 rounded-full text-xs"
-              >
+          {tile.inStock ? (
+            <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#5B7E3C] bg-[#f0f7ea] px-3 py-1 rounded-full w-fit mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#5B7E3C]" /> In Stock
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#c0392b] bg-[#fdf0f0] px-3 py-1 rounded-full w-fit mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c0392b]" /> Out of Stock
+            </span>
+          )}
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {tile.tags?.map((tag, i) => (
+              <span key={i} className="text-[11px] text-[#888] bg-[#f7f7f5] border border-[#eee] rounded-full px-3 py-1">
                 {tag}
               </span>
             ))}
           </div>
-        </div>
 
+          <button className="mt-auto w-full py-3 rounded-xl bg-[#5B7E3C] hover:bg-[#4e6e33] text-white text-[13px] font-medium uppercase tracking-wider transition-colors">
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

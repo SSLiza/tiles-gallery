@@ -12,11 +12,14 @@ import {
   TextField,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const name = e.target.name.value;
     const image = e.target.image.value;
     const email = e.target.email.value;
@@ -26,87 +29,95 @@ export default function RegisterPage() {
       name,
       image,
       email,
-      password
-    })
+      password,
+    });
+
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     } else {
-      alert("Registration successful! Please check your email to verify your account.");
-      router.push("/");
+      toast.success("Registration successful! Please check your email.");
+      router.push("/login");
     }
   };
 
   return (
-    <Card className="border mx-auto w-125 py-10 mt-5">
-      <h1 className="text-center text-2xl font-bold">Register</h1>
+    <div className="min-h-screen flex items-center justify-center px-4">
 
-      <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>
-        <TextField isRequired name="name" type="text">
-          <Label>Name</Label>
-          <Input placeholder="Enter your name" />
-          <FieldError />
-        </TextField>
+      <Card className="w-full max-w-md shadow-2xl rounded-2xl py-10">
 
-        <TextField isRequired name="image" type="text">
-          <Label>Image URL</Label>
-          <Input placeholder="Image URL" />
-          <FieldError />
-        </TextField>
+        {/* Title */}
+        <h1 className="text-center text-3xl font-bold mb-6">
+          Create Account
+        </h1>
 
-        <TextField
-          isRequired
-          name="email"
-          type="email"
-          validate={(value) => {
-            if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-              return "Please enter a valid email address";
-            }
+        <Form className="flex w-11/12 mx-auto flex-col gap-5" onSubmit={onSubmit}>
 
-            return null;
-          }}
-        >
-          <Label>Email</Label>
-          <Input placeholder="john@example.com" />
-          <FieldError />
-        </TextField>
+          {/* NAME */}
+          <TextField isRequired name="name" type="text">
+            <Label>Name</Label>
+            <Input
+              placeholder="Enter your name"
+              className="focus:border-[#c9a96e]"
+            />
+            <FieldError />
+          </TextField>
 
-        <TextField
-          isRequired
-          minLength={8}
-          name="password"
-          type="password"
-          validate={(value) => {
-            if (value.length < 8) {
-              return "Password must be at least 8 characters";
-            }
-            if (!/[A-Z]/.test(value)) {
-              return "Password must contain at least one uppercase letter";
-            }
-            if (!/[0-9]/.test(value)) {
-              return "Password must contain at least one number";
-            }
+          {/* IMAGE */}
+          <TextField isRequired name="image" type="text">
+            <Label>Image URL</Label>
+            <Input
+              placeholder="Image URL"
+              className="focus:border-[#c9a96e]"
+            />
+            <FieldError />
+          </TextField>
 
-            return null;
-          }}
-        >
-          <Label>Password</Label>
-          <Input placeholder="Enter your password" />
-          <Description>
-            Must be at least 8 characters with 1 uppercase and 1 number
-          </Description>
-          <FieldError />
-        </TextField>
+          {/* EMAIL */}
+          <TextField isRequired name="email" type="email">
+            <Label>Email</Label>
+            <Input
+              placeholder="john@example.com"
+              className="focus:border-[#c9a96e]"
+            />
+            <FieldError />
+          </TextField>
 
-        <div className="flex gap-2">
-          <Button type="submit">
-            <Check />
-            Submit
-          </Button>
-          <Button type="reset" variant="secondary">
-            Reset
-          </Button>
-        </div>
-      </Form>
-    </Card>
+          {/* PASSWORD */}
+          <TextField isRequired name="password" type="password">
+            <Label>Password</Label>
+            <Input
+              placeholder="Enter your password"
+              className="focus:border-[#c9a96e]"
+            />
+            <Description>
+              Must be 8+ chars, 1 uppercase, 1 number
+            </Description>
+            <FieldError />
+          </TextField>
+
+          {/* BUTTONS */}
+          <div className="flex gap-3">
+
+            <Button
+              type="submit"
+              className="bg-[#5B7E3C] text-white hover:bg-[#4a6a30] w-full"
+            >
+              <Check />
+              Register
+            </Button>
+
+            <Button
+              type="reset"
+              variant="secondary"
+              className="w-full text-[#5B7E3C]"
+            >
+              Reset
+            </Button>
+
+          </div>
+        </Form>
+
+      </Card>
+    </div>
   );
 }

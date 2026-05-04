@@ -2,18 +2,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import NavLink from './NavLink';
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.jpg';
 import { authClient } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
+import { useRouter } from 'next/navigation';
+import { RiLoginCircleFill ,RiUserAddFill} from "react-icons/ri";
+import { IoLogOutSharp } from "react-icons/io5";
+
+
 
 const Navbar = () => {
   const userInfo = authClient.useSession();
   console.log(userInfo.data?.user);
-  const handleSignOut = async () => {
-    await authClient.signOut();
-  }
+const router = useRouter();
+
+const handleSignOut = async () => {
+  await authClient.signOut();
+  router.push("/login");
+};
   return (
-    <div className="bg-[#7a756c] text-white border-b-0.5 sticky top-0 z-50">
+    <div className="bg-white text-[#5B7E3C] border-b-0.5 sticky top-0 z-50 border-b border-gray-200">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
 
         {/* Logo */}
@@ -21,12 +29,12 @@ const Navbar = () => {
           <Image
             src={logo}
             alt="Tile Gallery Logo"
-            width={45}
-            height={45}
+            width={60}
+            height={60}
             className="rounded-full"
           />
           <span className="font-semibold text-lg">
-            TileGallery
+            TilesGallery
           </span>
         </Link>
 
@@ -40,15 +48,15 @@ const Navbar = () => {
         {/* Right Side */}
         <div className="flex items-center gap-3">
 
-          {!userInfo.data?.user && <ul>  {/* Login Button */}
+          {!userInfo.data?.user && <ul className='flex gap-2'>  {/* Login Button */}
             <li><Link href="/login">
-              <button className="bg-[#1a1814] px-4 py-2 rounded-md btn font-medium">
-                Login
+              <button className="border border-[#5B7E3C] text-[#5B7E3C] p-2 rounded-md btn font-medium flex items-center gap-1">
+                <span><RiLoginCircleFill /></span><span>Login</span>
               </button>
             </Link></li>
             <li><Link href="/register">
-              <button className="bg-[#1a1814] px-4 py-2 rounded-md btn font-medium">
-                Register
+              <button className="border border-[#5B7E3C] text-[#5B7E3C] p-2 rounded-md btn font-medium flex items-center gap-1 ">
+                <span><RiUserAddFill /></span> <span>Register</span>
               </button>
             </Link> </li>
           </ul>
@@ -61,9 +69,9 @@ const Navbar = () => {
                 <Avatar.Fallback>{userInfo.data.user.name[0]}</Avatar.Fallback>
               </Avatar>
               <button onClick={handleSignOut}
-              className="bg-[#1a1814] px-4 py-2 rounded-md btn font-medium" 
+              className="border border-[#5B7E3C] text-[#5B7E3C] p-2 rounded-md btn font-medium flex items-center gap-1" 
             >
-              Logout
+              <span><IoLogOutSharp /></span> <span>Logout</span>
             </button>
             </div>
           }
