@@ -70,12 +70,22 @@ export default function Home() {
 
       {/* ⭐ FEATURED TILES */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-2xl md:text-3xl font-semibold text-[#c9a96e] mb-8 text-center
-animate__animated animate__fadeInUp">
+
+        <h2 className="text-2xl md:text-3xl font-semibold text-black mb-8 text-center">
           Featured Tiles
         </h2>
 
         <FeaturedTiles />
+
+        {/* Centered View All */}
+        <div className="flex justify-center mt-10">
+          <Link href="/all-tiles">
+            <Button className="bg-[#5B7E3C] text-white hover:scale-105 transition">
+              View All
+            </Button>
+          </Link>
+        </div>
+
       </section>
 
     </div>
