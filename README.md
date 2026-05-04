@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧱 Tiles Gallery
 
-## Getting Started
+A modern web application to discover, browse, and explore premium tile collections. Built with Next.js, BetterAuth, and MongoDB.
 
-First, run the development server:
+## 🌐 Live URL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+https://tiles-gallery-six.vercel.app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🎯 Purpose
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tiles Gallery is a full-stack tile showcase platform where users can browse a curated collection of tiles, view detailed information about each tile, and manage their personal profile — all within a secure, authenticated experience.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Key Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🏠 **Home Page** — Hero banner with "Discover Your Perfect Aesthetic" CTA, a scrolling marquee of new arrivals, and a featured tiles section showcasing top 4 tiles
+- 🖼️ **All Tiles Gallery** — Search tiles by title with a live search bar; browse all tiles in a responsive card grid
+- 🔍 **Tile Details Page** — High-res tile preview with full info: title, creator, style description, material, dimensions, price, and tags
+- 🔐 **Authentication** — Email/password login & registration + Google OAuth, powered by BetterAuth with MongoDB adapter
+- 👤 **My Profile** — View and update your display name and profile image URL
+- 📱 **Fully Responsive** — Optimized for mobile, tablet, and desktop
+- 🔒 **Protected Routes** — `/tile/[id]` and `/my-profile` are accessible only to logged-in users
+- 🔄 **Loading States** — Skeleton/spinner shown during all data fetching
+- 🚫 **Custom 404 Page** — Friendly not-found page for invalid routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 NPM Packages Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Package | Purpose |
+|---|---|
+| `next` | App framework (App Router) |
+| `better-auth` | Authentication (email + Google OAuth) |
+| `mongodb` | MongoDB database adapter |
+| `heroui` | UI component library |
+| `react-icons` | Icon set (login, logout, register icons) |
+| `animate.css` | Animation on Banner |
+| `react-toastify` | Toast notifications for feedback |
+| `tailwindcss` | Utility-first CSS framework |
+| `daisyui` | Tailwind component plugin |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---

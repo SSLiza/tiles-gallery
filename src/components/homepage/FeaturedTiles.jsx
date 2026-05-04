@@ -16,7 +16,7 @@ const FeaturedTiles = () => {
   }, []);
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
       {tiles.map((tile) => (
         <div
           key={tile.id}
